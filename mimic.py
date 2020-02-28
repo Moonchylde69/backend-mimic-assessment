@@ -67,7 +67,18 @@ def create_mimic_dict(filename):
                 "who" : ["knows"]
             }
     """
-    # +++your code here+++
+    with open(filename, 'r') as f:
+        mimic_dict = {}
+        prev = ''
+        split_words = f.read().split()
+
+        for word in split_words:
+            if prev not in mimic_dict:
+                mimic_dict[prev] = [word]
+            else:
+                mimic_dict[prev].append(word)
+
+        return mimic_dict
 
 
 def print_mimic(mimic_dict, start_word):
@@ -78,13 +89,20 @@ def print_mimic(mimic_dict, start_word):
         - Repeat this process 200 times
     """
     # +++your code here+++
-    pass
+    text = ''
+
+    for i in list(range(200)):
+        next_words = mimic_dict[start_word]
+        word = random.choice(next_words)
+        text += " " + word
+
+    print(text)
 
 
 # Provided main(), calls mimic_dict() and mimic()
 def main():
     if len(sys.argv) != 2:
-        print 'usage: python mimic.py file-to-read'
+        print('usage: python mimic.py file-to-read')
         sys.exit(1)
 
     d = create_mimic_dict(sys.argv[1])
