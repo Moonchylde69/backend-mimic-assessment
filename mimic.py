@@ -47,6 +47,7 @@ import random
 import sys
 
 __author__ = "???"
+# this took forever, still working things out
 
 
 def create_mimic_dict(filename):
